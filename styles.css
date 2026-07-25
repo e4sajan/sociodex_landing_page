@@ -1363,47 +1363,45 @@ button, input, select, textarea {
    12. SECTION 9: OUR VISION (EDITORIAL)
    -------------------------------------------------------------------------- */
 .vision-section {
-  padding: 8rem 0;
+  padding: 4.5rem 0;
   background-color: var(--color-dark-plum);
-  color: var(--color-cream);
+  color: #FFFFFF;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
+.vision-section p {
+  color: #FFFFFF;
+}
+
 .vision-quote {
   font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.18;
   color: var(--color-mustard);
-  max-width: 900px;
-  margin: 0 auto 2.5rem auto;
+  max-width: 850px;
+  margin: 0 auto 1.25rem auto;
   position: relative;
 }
 
-.vision-quote::before {
-  content: '“';
-  font-size: 8rem;
-  position: absolute;
-  top: -4rem;
-  left: -2rem;
-  color: rgba(235, 200, 90, 0.15);
-  font-family: serif;
+.vision-body {
+  max-width: 780px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #FFFFFF;
 }
 
-.vision-body {
-  max-width: 680px;
-  margin: 0 auto;
-  font-size: 1.25rem;
-  line-height: 1.8;
-  color: rgba(251, 246, 236, 0.85);
+.vision-body p {
+  color: #FFFFFF !important;
 }
 
 .vision-signature {
-  margin-top: 3rem;
+  margin-top: 1.5rem;
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--color-terracotta);
   letter-spacing: 0.05em;
 }
