@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SocioDex — Every celebration deserves a home</title>
+  <meta name="description" content="SocioDex gives every celebration its own living digital memory page. Preserving birthdays, weddings, farewells, anniversaries, and life's moments forever.">
+  
+  <!-- Favicon & Stylesheet -->
+  <link rel="icon" type="image/png" href="assets/images/logo_transparent.png">
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Preconnect Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+  <!-- Top Reading Progress Indicator -->
+  <div id="scroll-progress"></div>
+
+  <!-- Canvas Confetti Overlay -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ------------------------------------------------------------------------
+       NAVBAR
+       ------------------------------------------------------------------------ -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="#" class="brand-logo">
+        <img src="assets/images/logo_transparent.png" alt="SocioDex Logo" class="brand-logo-img">
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#how-it-works" class="nav-link">How it Works</a></li>
+        <li><a href="#who-its-for" class="nav-link">Who it's For</a></li>
+        <li><a href="#vision" class="nav-link">Vision</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn btn-primary btn-trigger-early-access">
+          Join Early Access
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ------------------------------------------------------------------------
+       SECTION 1: HERO
+       ------------------------------------------------------------------------ -->
+  <header class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content reveal-fade-up">
+        <div class="eyebrow">
+          <span>✨</span> Permanent Homes for Life's Moments
+        </div>
+        <h1 class="hero-headline">
+          Celebrations, <span>Reimagined.</span>
+        </h1>
+        <p class="hero-subheadline">
+          Create beautiful interactive memory pages for birthdays, weddings, farewells, anniversaries and every moment worth remembering.
+        </p>
+
+        <div class="hero-ctas">
+          <button class="btn btn-primary btn-large btn-trigger-early-access">
+            Join Early Access
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+          <button class="btn btn-secondary btn-large btn-trigger-demo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            Watch Demo
+          </button>
+        </div>
+
+        <div class="hero-social-proof">
+          <div class="avatar-group">
+            <div class="avatar-img" style="background-color: #E4603C;">AM</div>
+            <div class="avatar-img" style="background-color: #EBC85A; color: #241621;">SK</div>
+            <div class="avatar-img" style="background-color: #5C3A50;">RL</div>
+            <div class="avatar-img" style="background-color: #C94B29;">JD</div>
+          </div>
+          <div class="proof-text">
+            <strong>Over 2,400+</strong> celebrations preserved forever
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual Stage -->
+      <div class="hero-visual-stage reveal-scale-in">
+        <!-- Main Photo Card -->
+        <div class="hero-card-base card-main-photo">
+          <div class="card-photo-wrapper">
+            <img src="assets/images/birthday.jpg" alt="Sarah's 30th Birthday">
+            <span class="card-tag">🎂 Birthday Memory</span>
+          </div>
+          <div class="card-photo-info">
+            <h4>Sarah's 30th Birthday ✨</h4>
+            <p>Golden Hour Backyard Party — July 2026</p>
+          </div>
+          <div class="card-reactions-bar">
+            <span class="like-btn-demo">
+              <span class="heart-pop-icon">❤️</span> <span class="heart-count">142</span> Wishes
+            </span>
+            <span style="font-size: 0.8rem; color: var(--color-ink-light);">48 Photos Added</span>
+          </div>
+        </div>
+
+        <!-- Invite Badge Card -->
+        <div class="hero-card-base card-invite-badge">
+          <h5>Digital Invitation</h5>
+          <h4>Maya & Alex's Wedding 💍</h4>
+          <div class="invite-avatars">
+            <span>💌 128 RSVPs Confirmed</span>
+          </div>
+        </div>
+
+        <!-- Wish Bubble Card -->
+        <div class="hero-card-base card-wish-bubble">
+          <div class="wish-header">
+            <div class="wish-avatar">DV</div>
+            <div class="wish-author">David Vance</div>
+            <div class="wish-time">2m ago</div>
+          </div>
+          <div class="wish-text">
+            "So glad we could celebrate this milestone together! Check out the polaroid photos I uploaded 📸"
+          </div>
+        </div>
+
+        <!-- Floating Reactions -->
+        <div class="floating-reaction react-1">🥳</div>
+        <div class="floating-reaction react-2">💖</div>
+        <div class="floating-reaction react-3">🥂</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ------------------------------------------------------------------------
+         SECTION 2: THE PROBLEM (DARK PLUM)
+         ------------------------------------------------------------------------ -->
+    <section class="problem-section" id="problem">
+      <div class="container text-center">
+        <div class="eyebrow eyebrow-dark reveal-fade-up">
+          The Ephemeral Trap
+        </div>
+        <h2 class="section-heading reveal-fade-up">
+          Our memories disappear too quickly.
+        </h2>
+        <p class="section-subtitle reveal-fade-up">
+          Today, the most meaningful moments of our lives are buried under hundreds of daily group chats.
+        </p>
+
+        <div class="problem-grid">
+          <div class="problem-card reveal-fade-up">
+            <div class="problem-icon-wrap">💬</div>
+            <h3>Birthday wishes disappear</h3>
+            <p>Heartfelt messages get drowned under 300 notification pings and lost forever in chat history.</p>
+            <span class="faded-status">Lost in 24 hours</span>
+          </div>
+
+          <div class="problem-card reveal-fade-up" style="transition-delay: 0.1s;">
+            <div class="problem-icon-wrap">📄</div>
+            <h3>Wedding invitations stay PDFs</h3>
+            <p>Beautiful invitations end up as static, forgotten file attachments in email threads.</p>
+            <span class="faded-status">Uninteractive & Static</span>
+          </div>
+
+          <div class="problem-card reveal-fade-up" style="transition-delay: 0.2s;">
+            <div class="problem-icon-wrap">📕</div>
+            <h3>Farewell cards get forgotten</h3>
+            <p>Physical paper cards get damaged, misplaced, or packed away into dusty boxes never to be opened.</p>
+            <span class="faded-status">Physically Scattered</span>
+          </div>
+
+          <div class="problem-card reveal-fade-up" style="transition-delay: 0.3s;">
+            <div class="problem-icon-wrap">📸</div>
+            <h3>Photos stay scattered</h3>
+            <p>Every guest takes amazing photos on their phones, but 90% of them are never shared with anyone.</p>
+            <span class="faded-status">Buried on Devices</span>
+          </div>
+        </div>
+
+        <div class="problem-punchline reveal-scale-in">
+          <span class="punchline-badge">Moments deserve better.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 3: THE SOLUTION (INTERACTIVE MOCKUP)
+         ------------------------------------------------------------------------ -->
+    <section class="solution-section" id="solution">
+      <div class="container text-center">
+        <div class="eyebrow reveal-fade-up">
+          Introducing SocioDex
+        </div>
+        <h2 class="section-heading reveal-fade-up">
+          Meet SocioDex.
+        </h2>
+        <p class="section-subtitle reveal-fade-up">
+          A place where every celebration gets its own living digital home.
+        </p>
+
+        <!-- Interactive Mockup Stage -->
+        <div class="mockup-wrapper reveal-scale-in">
+          <div class="mockup-header-bar">
+            <div class="mac-btn mac-close"></div>
+            <div class="mac-btn mac-min"></div>
+            <div class="mac-btn mac-max"></div>
+            <div class="mockup-address-bar">
+              <img src="assets/images/logo_transparent.png" alt="SocioDex" style="height: 18px; width: auto; display: inline-block;">
+              <span>🔒 sociodex.app/sarah-turns-30</span>
+            </div>
+          </div>
+
+          <div class="mockup-body">
+            <!-- Mockup Banner -->
+            <div class="mockup-hero-banner">
+              <img src="assets/images/birthday.jpg" alt="Sarah's 30th Celebration">
+              <div class="mockup-banner-overlay">
+                <h3>Sarah's 30th Milestone Celebration ✨</h3>
+                <p>Preserved by 42 friends • 186 Memories Captured</p>
+              </div>
+            </div>
+
+            <!-- Mockup Nav Tabs -->
+            <div class="mockup-nav-tabs">
+              <button class="mockup-tab active" data-category="all">✨ All Memories</button>
+              <button class="mockup-tab" data-category="photos">📸 Photos & Videos</button>
+              <button class="mockup-tab" data-category="wishes">💌 Wish Wall</button>
+              <button class="mockup-tab" data-category="rsvps">🥂 Guests & RSVPs</button>
+            </div>
+
+            <!-- Mockup Grid Content -->
+            <div class="mockup-content-grid">
+              <div class="mockup-feed-column">
+                <div class="feed-card feed-card-dynamic" data-category="wishes">
+                  <div class="feed-card-header">
+                    <div class="feed-avatar" style="background-color: var(--color-terracotta);">EM</div>
+                    <div class="feed-user">
+                      <h5>Emma Watson</h5>
+                      <p>Wrote a wish • 10m ago</p>
+                    </div>
+                  </div>
+                  <p style="font-size: 0.95rem; color: var(--color-ink);">
+                    "Happy 30th Sarah! From college dorms to this amazing milestone, so proud of everything you've achieved. Here's to 30 more years of adventures! 🎉🥂"
+                  </p>
+                  <div style="margin-top: 0.8rem;">
+                    <span class="like-btn-demo">
+                      <span class="heart-pop-icon">❤️</span> <span class="heart-count">34</span> Likes
+                    </span>
+                  </div>
+                </div>
+
+                <div class="feed-card feed-card-dynamic" data-category="photos">
+                  <div class="feed-card-header">
+                    <div class="feed-avatar" style="background-color: var(--color-soft-plum);">JL</div>
+                    <div class="feed-user">
+                      <h5>Jason Lee</h5>
+                      <p>Uploaded 3 photos • 25m ago</p>
+                    </div>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.8rem; border-radius: 12px; overflow: hidden; height: 160px;">
+                    <img src="assets/images/wedding.jpg" style="width:100%; height:100%; object-fit:cover;" alt="Photo memory">
+                    <img src="assets/images/farewell.jpg" style="width:100%; height:100%; object-fit:cover;" alt="Photo memory 2">
+                  </div>
+                  <div>
+                    <span class="like-btn-demo">
+                      <span class="heart-pop-icon">❤️</span> <span class="heart-count">56</span> Likes
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sidebar Column -->
+              <div class="mockup-sidebar-column">
+                <div class="sidebar-box">
+                  <h4>Memory Wall Stats</h4>
+                  <div style="display: flex; flex-direction: column; gap: 0.8rem; font-size: 0.9rem;">
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: var(--color-ink-muted);">Total Wishes</span>
+                      <strong>84 Messages</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: var(--color-ink-muted);">Media Uploaded</span>
+                      <strong>142 Photos & Videos</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: var(--color-ink-muted);">Forever Link</span>
+                      <strong style="color: var(--color-terracotta);">Active Forever</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sidebar-box">
+                  <h4>Confirmed Guests</h4>
+                  <div class="guest-list-mini">
+                    <div class="guest-item">
+                      <span>Alex Rivera</span>
+                      <span class="guest-status">Attending</span>
+                    </div>
+                    <div class="guest-item">
+                      <span>Chloe Vance</span>
+                      <span class="guest-status">Attending</span>
+                    </div>
+                    <div class="guest-item">
+                      <span>Marcus Bell</span>
+                      <span class="guest-status">Attending</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 4: CELEBRATE ANYTHING
+         ------------------------------------------------------------------------ -->
+    <section class="celebrate-section" id="celebrate">
+      <div class="container text-center">
+        <div class="eyebrow reveal-fade-up">
+          Versatile Memory Pages
+        </div>
+        <h2 class="section-heading reveal-fade-up">
+          Celebrate anything.
+        </h2>
+        <p class="section-subtitle reveal-fade-up">
+          Custom themes, smart layouts, and tailored guestbooks designed for life's biggest milestones.
+        </p>
+
+        <div class="celebrate-grid">
+          <div class="celebrate-card reveal-fade-up">
+            <span class="celebrate-pill">Popular</span>
+            <div class="celebrate-icon-box">🎂</div>
+            <h3>Birthdays</h3>
+            <p>Turn birthday messages into a vibrant digital guestbook with photos and voice notes.</p>
+          </div>
+
+          <div class="celebrate-card reveal-fade-up" style="transition-delay: 0.1s;">
+            <span class="celebrate-pill">Luxury</span>
+            <div class="celebrate-icon-box">💍</div>
+            <h3>Weddings</h3>
+            <p>Collect wedding wishes, guest RSVPs, and live photo streams from every table in one place.</p>
+          </div>
+
+          <div class="celebrate-card reveal-fade-up" style="transition-delay: 0.15s;">
+            <span class="celebrate-pill">Teams</span>
+            <div class="celebrate-icon-box">🏢</div>
+            <h3>Corporate Events</h3>
+            <p>Celebrate product launches, team milestones, and annual retreats with your company.</p>
+          </div>
+
+          <div class="celebrate-card reveal-fade-up" style="transition-delay: 0.2s;">
+            <span class="celebrate-pill">Milestone</span>
+            <div class="celebrate-icon-box">🎓</div>
+            <h3>Graduations</h3>
+            <p>Preserve memories, group photos, and advice for graduates from family and friends.</p>
+          </div>
+
+          <div class="celebrate-card reveal-fade-up" style="transition-delay: 0.25s;">
+            <span class="celebrate-pill">Joyful</span>
+            <div class="celebrate-icon-box">👶</div>
+            <h3>Baby Showers</h3>
+            <p>Welcome the new arrival with heartfelt wishes, registry links, and ultrasound memories.</p>
+          </div>
+
+          <div class="celebrate-card reveal-fade-up" style="transition-delay: 0.3s;">
+            <span class="celebrate-pill">Love</span>
+            <div class="celebrate-icon-box">❤️</div>
+            <h3>Anniversaries</h3>
+            <p>Look back at decades of love with a timeline of photos and messages from loved ones.</p>
+          </div>
+
+          <div class="celebrate-card reveal-fade-up" style="transition-delay: 0.35s;">
+            <span class="celebrate-pill">Heartfelt</span>
+            <div class="celebrate-icon-box">🎉</div>
+            <h3>Farewells</h3>
+            <p>Replace paper cards with a permanent digital farewell book for departing colleagues.</p>
+          </div>
+
+          <div class="celebrate-card reveal-fade-up" style="transition-delay: 0.4s;">
+            <span class="celebrate-pill">Family</span>
+            <div class="celebrate-icon-box">👨‍👩‍👧</div>
+            <h3>Reunions</h3>
+            <p>Bring generations together to document family history, recipes, and gathering photos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 5: HOW IT WORKS
+         ------------------------------------------------------------------------ -->
+    <section class="how-section" id="how-it-works">
+      <div class="container text-center">
+        <div class="eyebrow reveal-fade-up">
+          Simplicity by Design
+        </div>
+        <h2 class="section-heading reveal-fade-up">
+          How SocioDex works.
+        </h2>
+        <p class="section-subtitle reveal-fade-up">
+          Four effortless steps to convert ephemeral moments into permanent digital keepsakes.
+        </p>
+
+        <div class="timeline-wrapper">
+          <div class="timeline-line"></div>
+
+          <div class="timeline-step reveal-fade-up">
+            <div class="step-node">1</div>
+            <div class="step-content">
+              <h3>Create a Page</h3>
+              <p>Choose a theme, customize your occasion title, and generate your custom memory link in 60 seconds.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step reveal-fade-up" style="transition-delay: 0.15s;">
+            <div class="step-node">2</div>
+            <div class="step-content">
+              <h3>Invite Everyone</h3>
+              <p>Share via WhatsApp, email, or display a single QR code at your venue for guests to scan instantly.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step reveal-fade-up" style="transition-delay: 0.3s;">
+            <div class="step-node">3</div>
+            <div class="step-content">
+              <h3>Celebrate Together</h3>
+              <p>Guests post messages, upload high-res photos, drop videos, and leave audio wishes without needing an app.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step reveal-fade-up" style="transition-delay: 0.45s;">
+            <div class="step-node">4</div>
+            <div class="step-content">
+              <h3>Relive Forever</h3>
+              <p>Your celebration stays archived forever. Revisit memories on every anniversary with family and friends.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 6: FEATURES MATRIX
+         ------------------------------------------------------------------------ -->
+    <section class="features-section" id="features">
+      <div class="container text-center">
+        <div class="eyebrow reveal-fade-up">
+          Crafted for Excellence
+        </div>
+        <h2 class="section-heading reveal-fade-up">
+          Everything you need for perfect memories.
+        </h2>
+        <p class="section-subtitle reveal-fade-up">
+          Thoughtfully built tools that make gathering, organizing, and reliving moments effortless.
+        </p>
+
+        <div class="features-matrix">
+          <!-- Column 1: CREATE -->
+          <div class="feature-column reveal-fade-up">
+            <div class="column-header">
+              <span class="column-badge badge-create">01</span>
+              <h3>CREATE</h3>
+            </div>
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-icon-box">🎨</div>
+                <div class="feature-info">
+                  <h4>Curated Templates</h4>
+                  <p>Hand-crafted design themes for every type of celebration and mood.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon-box">🔗</div>
+                <div class="feature-info">
+                  <h4>Custom URLs</h4>
+                  <p>Create clean, memorable vanity links like <code>sociodex.app/maya-alex</code>.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon-box">📲</div>
+                <div class="feature-info">
+                  <h4>Instant QR Codes</h4>
+                  <p>Printable QR codes ready to place on event tables, invitations, or banners.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: CONNECT -->
+          <div class="feature-column reveal-fade-up" style="transition-delay: 0.15s;">
+            <div class="column-header">
+              <span class="column-badge badge-connect">02</span>
+              <h3>CONNECT</h3>
+            </div>
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-icon-box">📸</div>
+                <div class="feature-info">
+                  <h4>Photos & 4K Videos</h4>
+                  <p>Collect high-resolution original media directly from guest camera rolls.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon-box">💌</div>
+                <div class="feature-info">
+                  <h4>Live Wish Wall</h4>
+                  <p>Interactive stream of heartfelt messages, advice, and stories.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon-box">❤️</div>
+                <div class="feature-info">
+                  <h4>Reactions & Comments</h4>
+                  <p>Guests can react, comment, and engage with memories in real-time.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 3: REMEMBER -->
+          <div class="feature-column reveal-fade-up" style="transition-delay: 0.3s;">
+            <div class="column-header">
+              <span class="column-badge badge-remember">03</span>
+              <h3>REMEMBER</h3>
+            </div>
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-icon-box">♾️</div>
+                <div class="feature-info">
+                  <h4>Forever Links</h4>
+                  <p>Your celebration link never expires or gets deleted from the cloud.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon-box">🔍</div>
+                <div class="feature-info">
+                  <h4>Smart Memory Search</h4>
+                  <p>Instantly search wishes by guest name, keyword, or date.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon-box">📦</div>
+                <div class="feature-info">
+                  <h4>One-Click Album Export</h4>
+                  <p>Download your complete memory collection in full high-resolution anytime.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 7: WHY SOCIODEX (COMPARISON TABLE)
+         ------------------------------------------------------------------------ -->
+    <section class="why-section" id="why">
+      <div class="container text-center">
+        <div class="eyebrow reveal-fade-up">
+          The Upgrade You Need
+        </div>
+        <h2 class="section-heading reveal-fade-up">
+          Why choose SocioDex?
+        </h2>
+        <p class="section-subtitle reveal-fade-up">
+          See how SocioDex compares to traditional ways of celebrating.
+        </p>
+
+        <div class="comparison-table-wrapper reveal-scale-in">
+          <div class="table-row table-header-row">
+            <div class="table-cell cell-traditional">Traditional Way</div>
+            <div class="table-cell cell-sociodex">SocioDex Experience</div>
+          </div>
+
+          <div class="table-row">
+            <div class="table-cell cell-traditional">
+              <span class="status-icon status-cross">✕</span>
+              WhatsApp chat wishes that disappear
+            </div>
+            <div class="table-cell cell-sociodex">
+              <span class="status-icon status-check">✓</span>
+              Living, interactive memory page
+            </div>
+          </div>
+
+          <div class="table-row">
+            <div class="table-cell cell-traditional">
+              <span class="status-icon status-cross">✕</span>
+              Static PDF invitations in email
+            </div>
+            <div class="table-cell cell-sociodex">
+              <span class="status-icon status-check">✓</span>
+              Dynamic invitation with live RSVPs
+            </div>
+          </div>
+
+          <div class="table-row">
+            <div class="table-cell cell-traditional">
+              <span class="status-icon status-cross">✕</span>
+              Physical paper cards that get lost
+            </div>
+            <div class="table-cell cell-sociodex">
+              <span class="status-icon status-check">✓</span>
+              Permanent digital farewell & memory wall
+            </div>
+          </div>
+
+          <div class="table-row">
+            <div class="table-cell cell-traditional">
+              <span class="status-icon status-cross">✕</span>
+              Scattered photos across 20 phones
+            </div>
+            <div class="table-cell cell-sociodex">
+              <span class="status-icon status-check">✓</span>
+              Centralized, organized photo gallery
+            </div>
+          </div>
+
+          <div class="table-row">
+            <div class="table-cell cell-traditional">
+              <span class="status-icon status-cross">✕</span>
+              Temporary chats forgotten next week
+            </div>
+            <div class="table-cell cell-sociodex">
+              <span class="status-icon status-check">✓</span>
+              Permanent celebrations to revisit forever
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 8: WHO IT'S FOR
+         ------------------------------------------------------------------------ -->
+    <section class="audience-section" id="who-its-for">
+      <div class="container text-center">
+        <div class="eyebrow reveal-fade-up">
+          Built for Everyone
+        </div>
+        <h2 class="section-heading reveal-fade-up">
+          Who SocioDex is for.
+        </h2>
+        <p class="section-subtitle reveal-fade-up">
+          Whether you're planning an intimate gathering or a major corporate milestone.
+        </p>
+
+        <div class="audience-grid">
+          <div class="audience-card reveal-fade-up">
+            <div class="audience-icon">🏡</div>
+            <h3>Families</h3>
+            <p>Archive birthdays, anniversaries, baby milestones, and family reunions in one shared space.</p>
+          </div>
+
+          <div class="audience-card reveal-fade-up" style="transition-delay: 0.1s;">
+            <div class="audience-icon">🥂</div>
+            <h3>Friend Groups</h3>
+            <p>Collect hilarious photos, inside jokes, and heartfelt wishes for friend birthdays & trips.</p>
+          </div>
+
+          <div class="audience-card reveal-fade-up" style="transition-delay: 0.15s;">
+            <div class="audience-icon">💼</div>
+            <h3>Companies</h3>
+            <p>Give departing teammates memorable farewell walls and celebrate company work anniversaries.</p>
+          </div>
+
+          <div class="audience-card reveal-fade-up" style="transition-delay: 0.2s;">
+            <div class="audience-icon">🎓</div>
+            <h3>Schools & Alumni</h3>
+            <p>Gather graduation wishes, yearbook memories, and reunion photos effortlessly.</p>
+          </div>
+
+          <div class="audience-card reveal-fade-up" style="transition-delay: 0.25s;">
+            <div class="audience-icon">🌐</div>
+            <h3>Communities</h3>
+            <p>Document local festivals, volunteer milestones, and club anniversaries together.</p>
+          </div>
+
+          <div class="audience-card reveal-fade-up" style="transition-delay: 0.3s;">
+            <div class="audience-icon">✨</div>
+            <h3>Event Organizers</h3>
+            <p>Offer clients a premium digital memory souvenir for weddings, galas, and parties.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 9: OUR VISION
+         ------------------------------------------------------------------------ -->
+    <section class="vision-section" id="vision">
+      <div class="container">
+        <blockquote class="vision-quote reveal-scale-in">
+          "We believe memories shouldn't disappear."
+        </blockquote>
+        
+        <div class="vision-body reveal-fade-up">
+          <p>
+            The internet became great at sharing instant moments — stories that vanish in 24 hours and chats buried in notifications.
+          </p>
+          <p style="margin-top: 1.5rem;">
+            Now it's time to preserve them. SocioDex is building the permanent home for life's celebrations, giving every birthday, wedding, and farewell the honor it deserves.
+          </p>
+        </div>
+
+        <div class="vision-signature reveal-fade-up">
+          — The SocioDex Team
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 10: FAQ
+         ------------------------------------------------------------------------ -->
+    <section class="faq-section" id="faq">
+      <div class="container text-center">
+        <div class="eyebrow reveal-fade-up">
+          Got Questions?
+        </div>
+        <h2 class="section-heading reveal-fade-up">
+          Frequently asked questions.
+        </h2>
+        <p class="section-subtitle reveal-fade-up">
+          Everything you need to know about SocioDex memory pages.
+        </p>
+
+        <div class="faq-container reveal-scale-in">
+          <div class="faq-item active">
+            <button class="faq-question">
+              Is SocioDex free to use?
+              <svg class="faq-icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Yes! You can create your first memory page completely free with full guest participation, photo uploads, and wish collection.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              Do guests need to download an app or create an account?
+              <svg class="faq-icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Not at all! Guests can simply tap your link or scan your event QR code in any mobile browser to leave wishes and photos instantly.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              Can I upload videos and audio wishes?
+              <svg class="faq-icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Yes! SocioDex supports high-definition video clips, voice note wishes, photos, and formatted text messages.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              Can companies use SocioDex for team farewells?
+              <svg class="faq-icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Absolutely. Companies love using SocioDex as a modern, permanent digital farewell book and team celebration hub.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              Can I create multiple memory pages?
+              <svg class="faq-icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Yes! You can manage multiple celebration pages from your dashboard for birthdays, weddings, anniversaries, and more.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              Will my celebration memory page stay forever?
+              <svg class="faq-icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. The core philosophy of SocioDex is permanence. Your celebration page link will remain accessible so you can relive it year after year.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 11: FINAL CTA
+         ------------------------------------------------------------------------ -->
+    <section class="final-cta-section">
+      <div class="container">
+        <div class="cta-banner reveal-scale-in">
+          <h2>Your next celebration deserves more than another group chat.</h2>
+          <p>Give your special moment its permanent digital home in less than 60 seconds.</p>
+          <button class="btn btn-primary btn-large btn-trigger-early-access">
+            Join Early Access
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ------------------------------------------------------------------------
+       FOOTER
+       ------------------------------------------------------------------------ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="brand-logo">
+            <img src="assets/images/logo_white.png" alt="SocioDex Logo" class="footer-logo-img">
+          </a>
+          <p>Where celebrations become permanent memories. Give every moment its own beautiful home.</p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Product</h4>
+          <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#celebrate">Celebration Types</a></li>
+            <li><a href="#why">Why SocioDex</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="#vision">Our Vision</a></li>
+            <li><a href="#who-its-for">Who It's For</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Security</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 SocioDex, Inc. All rights reserved.</div>
+        <div style="display: flex; gap: 1.2rem;">
+          <a href="#">Twitter/X</a>
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ------------------------------------------------------------------------
+       MODALS: EARLY ACCESS & DEMO
+       ------------------------------------------------------------------------ -->
+  <!-- Early Access Modal -->
+  <div class="modal-overlay" id="early-access-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn">&times;</button>
+      <img src="assets/images/logo_transparent.png" alt="SocioDex Logo" class="modal-logo-img">
+      <h3>Join SocioDex Early Access 🎉</h3>
+      <p>Be the first to create permanent memory pages for your upcoming celebrations.</p>
+
+      <form class="modal-form" id="early-access-form">
+        <div class="form-group">
+          <label for="user-email">Your Email Address</label>
+          <input type="email" id="user-email" class="form-input" placeholder="sarah@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="celebration-type">What are you celebrating next?</label>
+          <select id="celebration-type" class="form-select">
+            <option value="birthday">🎂 Birthday</option>
+            <option value="wedding">💍 Wedding</option>
+            <option value="farewell">🎉 Farewell</option>
+            <option value="anniversary">❤️ Anniversary</option>
+            <option value="corporate">🏢 Corporate Event</option>
+            <option value="other">✨ Other Moment</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-large" style="width: 100%; margin-top: 0.5rem;">
+          Get VIP Early Access
+        </button>
+      </form>
+
+      <div id="form-success-state" style="display: none; text-align: center; padding: 1.5rem 0;">
+        <div style="font-size: 3rem; margin-bottom: 0.5rem;">🥳</div>
+        <h4 style="font-size: 1.4rem; color: var(--color-terracotta); margin-bottom: 0.4rem;">You're on the VIP list!</h4>
+        <p style="font-size: 0.95rem; color: var(--color-ink-muted);">We'll send your exclusive invite code very soon.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Watch Demo Modal -->
+  <div class="modal-overlay" id="demo-modal">
+    <div class="modal-card" style="max-width: 680px;">
+      <button class="modal-close-btn">&times;</button>
+      <img src="assets/images/logo_transparent.png" alt="SocioDex Logo" class="modal-logo-img">
+      <h3>SocioDex Product Tour 🎥</h3>
+      <p>Experience how celebrations come alive on SocioDex.</p>
+      <div style="background-color: var(--color-dark-plum); border-radius: 16px; height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; padding: 2rem;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background-color: var(--color-terracotta); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 1rem; box-shadow: var(--shadow-terracotta-btn);">▶</div>
+        <h4 style="color: white; font-size: 1.2rem; margin-bottom: 0.4rem;">Interactive SocioDex Walkthrough</h4>
+        <p style="color: rgba(255,255,255,0.7); font-size: 0.875rem;">1-minute tour of living memory pages, guest wishes, and photo galleries.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to Top">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+  </button>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
