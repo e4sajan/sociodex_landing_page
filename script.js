@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaqAccordion();
   initMockupTabs();
   initInteractiveReactions();
+  initFeatureDiscovery();
   initModals();
   initCanvasConfetti();
   initBackToTop();
@@ -304,6 +305,48 @@ function initBackToTop() {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   10. INTERACTIVE COMPARISON FEATURE DISCOVERY
+   -------------------------------------------------------------------------- */
+function initFeatureDiscovery() {
+  const interactiveRows = document.querySelectorAll('.interactive-row');
+  const discoveryCards = document.querySelectorAll('.discovery-card');
+
+  if (!interactiveRows.length) return;
+
+  function activateFeature(featureId) {
+    interactiveRows.forEach(row => {
+      if (row.dataset.feature === featureId) {
+        row.classList.add('active');
+      } else {
+        row.classList.remove('active');
+      }
+    });
+
+    discoveryCards.forEach(card => {
+      if (card.id === `discovery-card-${featureId}`) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
+    });
+  }
+
+  interactiveRows.forEach(row => {
+    // Hover event for desktop
+    row.addEventListener('mouseenter', () => {
+      const featureId = row.dataset.feature;
+      if (featureId) activateFeature(featureId);
+    });
+
+    // Click/tap event for mobile and accessibility
+    row.addEventListener('click', () => {
+      const featureId = row.dataset.feature;
+      if (featureId) activateFeature(featureId);
     });
   });
 }
