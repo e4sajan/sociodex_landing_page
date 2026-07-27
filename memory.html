@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sarah's 30th Milestone — SocioDex Digital Celebration Space</title>
+  <title>SocioDex — Digital Celebration Space</title>
   <meta name="description" content="A living digital memory page built with love, appreciation, stories, and photos by everyone who matters.">
   
   <!-- Favicon & Stylesheets -->
@@ -19,34 +19,64 @@
   <canvas id="memory-confetti-canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:99999;"></canvas>
 
   <!-- ==========================================================================
-       TOP FIXED PRESET TOOLBAR (INTERACTIVE DEMO ENGINE)
+       GIFT / CARD UNWRAPPING REVEAL OVERLAY
        ========================================================================== -->
-  <header class="preset-bar">
+  <div class="gift-unwrap-overlay" id="gift-unwrap-overlay">
+    <div class="gift-box-card">
+      <div class="gift-ribbon-badge">✨ Special Celebration</div>
+      <div class="gift-icon-wrap" id="gift-icon-anim">🎁</div>
+      <h2 style="font-family:var(--font-heading); font-size:2.2rem; margin-bottom:0.5rem; color:var(--color-ink);" id="unwrap-title">A Memory Gift Awaits</h2>
+      <p style="color:var(--color-ink-muted); margin-bottom:1.5rem; font-size:1.05rem;" id="unwrap-subtitle">Tap below to unwrap this living celebration space.</p>
+      <button type="button" class="btn-add-memory" id="btn-unwrap-gift" style="font-size:1.15rem; padding:0.85rem 2.2rem; width:100%; justify-content:center;">
+        ✨ Open Celebration Book
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       404 NOT FOUND STATE
+       ========================================================================== -->
+  <div class="not-found-container" id="not-found-container" style="display:none; text-align:center; padding:5rem 1.5rem;">
+    <div style="font-size:4rem; margin-bottom:1rem;">🔍</div>
+    <h2 style="font-family:var(--font-heading); font-size:2.5rem; margin-bottom:0.5rem;">Memory Page Not Found</h2>
+    <p style="color:var(--color-ink-muted); max-width:480px; margin:0 auto 2rem auto; font-size:1.1rem;">
+      The requested celebration link could not be found or may have expired.
+    </p>
+    <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+      <a href="creator.html" class="btn-add-memory" style="text-decoration:none;">✨ Create New Memory Page</a>
+      <a href="memory.html?slug=sarah-30th" class="wall-filter-btn" style="text-decoration:none; padding:0.7rem 1.5rem;">View Sample Demo Page</a>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       TOP FIXED TOOLBAR
+       ========================================================================== -->
+  <header class="preset-bar" id="main-memory-bar">
     <div class="container preset-bar-inner">
       <div class="preset-brand">
         <a href="index.html" style="display:flex; align-items:center; text-decoration:none;">
           <img src="assets/images/logo_transparent.png" alt="SocioDex Logo" class="preset-brand-logo" style="height:36px; width:auto;">
         </a>
-        <span class="preset-brand-tag">✨ Memory Space</span>
+        <span class="preset-brand-tag" id="bar-brand-tag">✨ Memory Space</span>
       </div>
 
       <!-- Celebration Preset Switcher -->
       <div class="preset-selector" id="preset-selector-group">
-        <button class="preset-btn active" data-preset="birthday">
-          🎂 Birthday Page
-        </button>
-        <button class="preset-btn" data-preset="wedding">
-          💍 Wedding Page
-        </button>
-        <button class="preset-btn" data-preset="farewell">
-          👋 Farewell Page
-        </button>
-        <button class="preset-btn" data-preset="team">
-          🏆 Team Milestone
-        </button>
+        <button class="preset-btn active" data-preset="birthday">🎂 Birthday</button>
+        <button class="preset-btn" data-preset="wedding">💍 Wedding</button>
+        <button class="preset-btn" data-preset="farewell">👋 Farewell</button>
+        <button class="preset-btn" data-preset="team">🏆 Team</button>
       </div>
 
       <div class="preset-actions">
+        <!-- Host Settings Drawer Trigger -->
+        <button type="button" class="wall-filter-btn" id="btn-toggle-admin-drawer" style="display:none; padding:0.5rem 0.9rem;">
+          ⚙️ Host Settings
+        </button>
+        <!-- Auth Sign In / User Badge -->
+        <button type="button" class="wall-filter-btn" id="btn-user-auth-badge" style="padding:0.5rem 0.9rem;">
+          👤 Sign In
+        </button>
         <button class="btn-add-memory" id="trigger-memory-modal">
           <span>💌</span> Leave a Memory
         </button>
@@ -54,7 +84,28 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-memory-content">
+    <!-- ==========================================================================
+         GUEST RSVP BANNER (Visible when ?gid=[guestId] or guest mode)
+         ========================================================================== -->
+    <div class="container" id="guest-rsvp-banner-wrap" style="display:none; margin-top:1.5rem;">
+      <div class="guest-rsvp-banner">
+        <div>
+          <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em; font-weight:800; opacity:0.85;">Guest Invitation RSVP</span>
+          <h3 style="font-family:var(--font-heading); font-size:1.4rem; margin-bottom:0.2rem;" id="rsvp-guest-name-text">Hi Guest! Will you be joining us?</h3>
+          <p style="font-size:0.9rem; opacity:0.9;" id="rsvp-status-detail-text">Please confirm your attendance for the celebration.</p>
+        </div>
+        <div style="display:flex; gap:0.6rem;">
+          <button type="button" class="btn-add-memory" id="btn-rsvp-attending" style="background:#2C5F2E; padding:0.6rem 1.2rem; font-size:0.9rem;">
+            ✓ Attending
+          </button>
+          <button type="button" class="wall-filter-btn" id="btn-rsvp-declined" style="background:rgba(255,255,255,0.2); color:white; border:none; padding:0.6rem 1.2rem; font-size:0.9rem;">
+            ✕ Declined
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- ==========================================================================
          SECTION 1: HERO CELEBRATION STAGE
          ========================================================================== -->
@@ -65,6 +116,11 @@
           <div class="hero-cover-overlay"></div>
 
           <div class="hero-cover-content">
+            <!-- Corporate Logo (if enabled) -->
+            <div id="hero-corporate-logo-wrap" style="display:none; margin-bottom:1rem;">
+              <img src="" id="hero-corporate-logo-img" style="height:48px; max-width:200px; object-fit:contain; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3));" alt="Corporate Brand Logo">
+            </div>
+
             <div class="hero-header-row">
               <div class="hero-portrait-frame">
                 <img src="assets/images/birthday.jpg" id="hero-portrait-image" alt="Profile Portrait">
@@ -79,7 +135,7 @@
                   Happy 30th Birthday, Sarah! ✨
                 </h1>
                 <p class="hero-subtitle-text" id="hero-subtitle-text">
-                  Golden Hour Backyard Party — Gathered with 247 friends and family from around the world.
+                  Golden Hour Backyard Party — Gathered with friends and family.
                 </p>
               </div>
             </div>
@@ -107,16 +163,48 @@
                   <span>Photos</span>
                 </div>
               </div>
-              <div class="stat-pill-card">
-                <span class="stat-icon-wrap">🎥</span>
+              <div class="stat-pill-card" id="stat-rsvp-pill" style="display:none;">
+                <span class="stat-icon-wrap">🥂</span>
                 <div class="stat-info-text">
-                  <strong id="stat-videos-count">34</strong>
-                  <span>Videos</span>
+                  <strong id="stat-rsvp-count">0</strong>
+                  <span>RSVP Attending</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         EVENT DETAILS & SCHEDULE TIMELINE (Shown for Invitation pages)
+         ========================================================================== -->
+    <section class="container" id="section-invitation-details" style="display:none; margin-bottom:3rem;">
+      <div class="story-card-wrapper" style="border-left-color:var(--theme-accent);">
+        <div class="section-eyebrow" style="margin-bottom:0.8rem;">📍 Event Details & Schedule</div>
+        <div class="form-row" style="margin-bottom:1.5rem;">
+          <div>
+            <h3 style="font-size:1.3rem; margin-bottom:0.2rem;" id="invite-venue-name">Grand Garden Estate</h3>
+            <p style="font-size:0.95rem; color:var(--color-ink-muted);" id="invite-venue-addr">742 Evergreen Terrace, Springfield</p>
+            <a href="#" target="_blank" id="btn-maps-link" class="btn-add-memory" style="display:inline-flex; text-decoration:none; margin-top:0.6rem; padding:0.4rem 1rem; font-size:0.85rem;">
+              🗺️ Open in Google Maps ↗
+            </a>
+          </div>
+          <div>
+            <div style="margin-bottom:0.8rem;">
+              <strong style="font-size:0.85rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--color-ink-muted);">Dress Code</strong>
+              <p style="font-size:1.05rem; font-weight:700; color:var(--color-ink);" id="invite-dress-code">Garden Cocktail / Formal</p>
+            </div>
+            <div>
+              <strong style="font-size:0.85rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--color-ink-muted);">Registry / Notes</strong>
+              <p style="font-size:0.95rem; color:var(--color-ink-muted);" id="invite-registry-notes">Your presence is our gift!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Schedule Timeline Table -->
+        <h4 style="font-family:var(--font-heading); font-size:1.15rem; margin-bottom:0.8rem;">Event Schedule Timeline</h4>
+        <div id="invite-schedule-timeline" style="display:flex; flex-direction:column; gap:0.6rem;"></div>
       </div>
     </section>
 
@@ -128,13 +216,13 @@
         <div class="story-card-wrapper">
           <div class="story-quote-mark">“</div>
           <p class="story-body-text" id="story-body-text">
-            "Today we're celebrating someone who has inspired friends, family, and colleagues through kindness, curiosity, and unforgettable memories. Turning 30 isn't just another year—it's a celebration of every life you've touched."
+            "Today we're celebrating someone who has inspired friends, family, and colleagues through kindness, curiosity, and unforgettable memories."
           </p>
           <div class="story-footer-byline">
             <div class="story-creator-avatar" id="story-creator-avatar">DV</div>
             <div class="story-creator-meta">
               <h5 id="story-creator-name">David Vance & Family</h5>
-              <p id="story-creator-rel">Organized with love for Sarah • July 2026</p>
+              <p id="story-creator-rel">Organized with love</p>
             </div>
           </div>
         </div>
@@ -142,7 +230,7 @@
     </section>
 
     <!-- ==========================================================================
-         SECTION 3: FEATURED MEMORIES (HIGHLIGHT SPOTLIGHT)
+         SECTION 3: FEATURED MEMORIES
          ========================================================================== -->
     <section class="featured-section">
       <div class="container">
@@ -152,82 +240,7 @@
         <h2 class="section-title">Featured Memories</h2>
         <p class="section-desc">The most heartfelt, funny, and emotional highlights contributed by loved ones.</p>
 
-        <div class="featured-grid" id="featured-grid">
-          <!-- Featured Card 1: Most Heartfelt -->
-          <div class="featured-card">
-            <span class="featured-badge badge-heartfelt">❤️ Most Heartfelt</span>
-            <p class="featured-content-quote">
-              "Sarah, you were the first person who made me feel welcome when I moved across the country. I'll never forget our late-night coffee chats and how you always show up when people need you."
-            </p>
-            <div class="featured-author-row">
-              <div class="featured-author-info">
-                <div class="author-mini-avatar" style="background-color:#E4603C; color:white;">EM</div>
-                <div>
-                  <div class="author-name">Emma Watson</div>
-                  <div class="author-rel">Best Friend since 2014</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Featured Card 2: Favorite Photo -->
-          <div class="featured-card">
-            <span class="featured-badge badge-photo">📸 Favorite Photo</span>
-            <div class="featured-media-preview">
-              <img src="assets/images/wedding.jpg" alt="Featured Photo">
-            </div>
-            <p class="featured-content-quote" style="font-size:0.95rem;">
-              "Polaroid captured at golden hour right before cake cutting! Look at those smiles! 🥳"
-            </p>
-            <div class="featured-author-row">
-              <div class="featured-author-info">
-                <div class="author-mini-avatar" style="background-color:#EBC85A; color:#241621;">JL</div>
-                <div>
-                  <div class="author-name">Jason Lee</div>
-                  <div class="author-rel">College Roommate</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Featured Card 3: Most Emotional Video -->
-          <div class="featured-card">
-            <span class="featured-badge badge-video">🎥 Most Emotional Video</span>
-            <div class="featured-media-preview">
-              <img src="assets/images/farewell.jpg" alt="Featured Video">
-              <div class="play-overlay-btn" class="open-video-demo">▶</div>
-            </div>
-            <p class="featured-content-quote" style="font-size:0.95rem;">
-              "Surprise video message compiled from 18 high school friends spread across 4 continents."
-            </p>
-            <div class="featured-author-row">
-              <div class="featured-author-info">
-                <div class="author-mini-avatar" style="background-color:#5C3A50; color:white;">MK</div>
-                <div>
-                  <div class="author-name">Maya & Kevin</div>
-                  <div class="author-rel">High School Crew</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Featured Card 4: Creator's Pick -->
-          <div class="featured-card">
-            <span class="featured-badge badge-creator">⭐ Creator's Pick</span>
-            <p class="featured-content-quote">
-              "Three decades of pure joy, warmth, and resilience. Watching you grow into the leader, friend, and human you are today is the greatest blessing of our lives."
-            </p>
-            <div class="featured-author-row">
-              <div class="featured-author-info">
-                <div class="author-mini-avatar" style="background-color:#C94B29; color:white;">M&D</div>
-                <div>
-                  <div class="author-name">Mom & Dad</div>
-                  <div class="author-rel">Family</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="featured-grid" id="featured-grid"></div>
       </div>
     </section>
 
@@ -251,181 +264,7 @@
         </div>
 
         <!-- Masonry Grid Wall -->
-        <div class="keepsake-grid" id="keepsake-grid">
-
-          <!-- Keepsake 1: Letter Wish Foldable -->
-          <div class="keepsake-card card-style-letter" data-type="wish">
-            <div class="card-header-bar">
-              <div class="contributor-meta">
-                <div class="contributor-avatar" style="background-color:#E4603C;">AR</div>
-                <div>
-                  <div class="contributor-name">Alex Rivera</div>
-                  <div class="contributor-tag">Colleague</div>
-                </div>
-              </div>
-              <span class="card-timestamp">2h ago</span>
-            </div>
-            <p class="keepsake-text">
-              "Happy Birthday Sarah! Working with you over the past 3 years has been absolute joy. You bring positive energy into every single room!"
-            </p>
-            <div class="letter-foldable">
-              <span class="letter-fold-toggle">✉️ Open Full Letter...</span>
-              <div class="letter-full-text">
-                "I still remember our first team retreat when we stayed up until 3 AM brainstorming our flagship project. Thank you for always believing in the team and guiding us with patience."
-              </div>
-            </div>
-            <div class="keepsake-card-footer">
-              <div class="reaction-btn-group">
-                <button class="reaction-btn reaction-trigger"><span class="reaction-icon">❤️</span> <span class="reaction-count">42</span></button>
-                <button class="reaction-btn reaction-trigger"><span class="reaction-icon">🥂</span> <span class="reaction-count">19</span></button>
-              </div>
-              <span style="font-size:0.75rem; color:var(--color-ink-light);">Keepsake #104</span>
-            </div>
-          </div>
-
-          <!-- Keepsake 2: Polaroid Photo Card -->
-          <div class="keepsake-card card-style-polaroid" data-type="photo">
-            <div class="polaroid-img-frame">
-              <img src="assets/images/birthday.jpg" alt="Polaroid Memory">
-            </div>
-            <div class="card-header-bar">
-              <div class="contributor-meta">
-                <div class="contributor-avatar" style="background-color:#EBC85A; color:#241621;">SK</div>
-                <div>
-                  <div class="contributor-name">Sophia Chen</div>
-                  <div class="contributor-tag">College Friend</div>
-                </div>
-              </div>
-              <span class="card-timestamp">4h ago</span>
-            </div>
-            <p class="keepsake-text handwritten-text" style="font-size:1.3rem; margin-bottom:0.5rem;">
-              "Golden hour laughs with the birthday girl! 🌅"
-            </p>
-            <div class="keepsake-card-footer">
-              <div class="reaction-btn-group">
-                <button class="reaction-btn reaction-trigger"><span class="reaction-icon">💖</span> <span class="reaction-count">88</span></button>
-                <button class="reaction-btn reaction-trigger"><span class="reaction-icon">✨</span> <span class="reaction-count">34</span></button>
-              </div>
-              <span style="font-size:0.75rem; color:var(--color-ink-light);">Polaroid #82</span>
-            </div>
-          </div>
-
-          <!-- Keepsake 3: Audio Voice Note -->
-          <div class="keepsake-card card-style-audio" data-type="audio">
-            <div class="card-header-bar">
-              <div class="contributor-meta">
-                <div class="contributor-avatar" style="background-color:#5C3A50;">GB</div>
-                <div>
-                  <div class="contributor-name">Grandma Beatrice</div>
-                  <div class="contributor-tag">Family</div>
-                </div>
-              </div>
-              <span class="card-timestamp">5h ago</span>
-            </div>
-
-            <!-- Voice Note Audio Visualizer -->
-            <div class="audio-player-box">
-              <button class="audio-play-btn">▶</button>
-              <div class="audio-waveform-canvas">
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-              </div>
-              <span class="audio-duration">0:42</span>
-            </div>
-
-            <p class="keepsake-text" style="font-size:0.9rem; font-style:italic;">
-              "Sending my warmest blessings and singing your favorite lullaby from back home."
-            </p>
-            <div class="keepsake-card-footer">
-              <div class="reaction-btn-group">
-                <button class="reaction-btn reaction-trigger"><span class="reaction-icon">🥹</span> <span class="reaction-count">112</span></button>
-                <button class="reaction-btn reaction-trigger"><span class="reaction-icon">❤️</span> <span class="reaction-count">95</span></button>
-              </div>
-              <span style="font-size:0.75rem; color:var(--color-ink-light);">Voice Note #14</span>
-            </div>
-          </div>
-
-          <!-- Keepsake 4: Story Card -->
-          <div class="keepsake-card" data-type="wish">
-            <div class="card-header-bar">
-              <div class="contributor-meta">
-                <div class="contributor-avatar" style="background-color:#C94B29;">JD</div>
-                <div>
-                  <div class="contributor-name">Julian & Daniel</div>
-                  <div class="contributor-tag">Mentors</div>
-                </div>
-              </div>
-              <span class="card-timestamp">6h ago</span>
-            </div>
-            <p class="keepsake-text">
-              "We remember meeting Sarah at her university design showcase 8 years ago. Her passion for creating human experiences was evident even then. So thrilled for everything you've achieved!"
-            </p>
-            <div class="keepsake-card-footer">
-              <div class="reaction-btn-group">
-                <button class="reaction-btn reaction-trigger"><span class="reaction-icon">⭐</span> <span class="reaction-count">56</span></button>
-              </div>
-              <span style="font-size:0.75rem; color:var(--color-ink-light);">Story #45</span>
-            </div>
-          </div>
-
-          <!-- Keepsake 5: Group Photo Polaroid -->
-          <div class="keepsake-card card-style-polaroid" data-type="photo">
-            <div class="polaroid-img-frame">
-              <img src="assets/images/farewell.jpg" alt="Group moment">
-            </div>
-            <div class="card-header-bar">
-              <div class="contributor-meta">
-                <div class="contributor-avatar" style="background-color:#3D2436;">TA</div>
-                <div>
-                  <div class="contributor-name">Team Alpha</div>
-                  <div class="contributor-tag">Work Family</div>
-                </div>
-              </div>
-              <span class="card-timestamp">8h ago</span>
-            </div>
-            <p class="keepsake-text">
-              "Surprise cake cutting at the office before the weekend celebration! 🎂🎉"
-            </p>
-            <div class="keepsake-card-footer">
-              <div class="reaction-btn-group">
-                <button class="reaction-btn reaction-trigger"><span class="reaction-icon">🥳</span> <span class="reaction-count">130</span></button>
-              </div>
-              <span style="font-size:0.75rem; color:var(--color-ink-light);">Photo #190</span>
-            </div>
-          </div>
-
-          <!-- Keepsake 6: Funny Wish Card -->
-          <div class="keepsake-card card-style-letter" data-type="wish">
-            <div class="card-header-bar">
-              <div class="contributor-meta">
-                <div class="contributor-avatar" style="background-color:#EBC85A; color:#241621;">MR</div>
-                <div>
-                  <div class="contributor-name">Marcus Vance</div>
-                  <div class="contributor-tag">Brother</div>
-                </div>
-              </div>
-              <span class="card-timestamp">10h ago</span>
-            </div>
-            <p class="keepsake-text">
-              "Officially welcoming you to the 30s club! Don't worry, bedtime moves from midnight to 9:30 PM, but the coffee gets better! ☕😂"
-            </p>
-            <div class="keepsake-card-footer">
-              <div class="reaction-btn-group">
-                <button class="reaction-btn reaction-trigger"><span class="reaction-icon">😂</span> <span class="reaction-count">154</span></button>
-              </div>
-              <span style="font-size:0.75rem; color:var(--color-ink-light);">Keepsake #67</span>
-            </div>
-          </div>
-
-        </div>
+        <div class="keepsake-grid" id="keepsake-grid"></div>
       </div>
     </section>
 
@@ -440,39 +279,7 @@
         <h2 class="section-title">Shared Gallery</h2>
         <p class="section-desc">One collective visual story built by everyone who attended.</p>
 
-        <div class="gallery-grid" id="gallery-grid">
-          <div class="gallery-item tall" data-src="assets/images/birthday.jpg" data-author="Emma Watson" data-caption="Sunlight through the garden trees during toasts.">
-            <img src="assets/images/birthday.jpg" alt="Gallery Photo 1">
-            <div class="gallery-overlay-meta">
-              <div class="gallery-uploader">Emma Watson</div>
-              <div class="gallery-caption">Garden toast moments 🥂</div>
-            </div>
-          </div>
-
-          <div class="gallery-item wide" data-src="assets/images/wedding.jpg" data-author="David Vance" data-caption="Group photo of all 45 dinner guests around the table.">
-            <img src="assets/images/wedding.jpg" alt="Gallery Photo 2">
-            <div class="gallery-overlay-meta">
-              <div class="gallery-uploader">David Vance</div>
-              <div class="gallery-caption">Full table celebration 🕯️</div>
-            </div>
-          </div>
-
-          <div class="gallery-item" data-src="assets/images/farewell.jpg" data-author="Marcus Vance" data-caption="Cake cutting countdown!">
-            <img src="assets/images/farewell.jpg" alt="Gallery Photo 3">
-            <div class="gallery-overlay-meta">
-              <div class="gallery-uploader">Marcus Vance</div>
-              <div class="gallery-caption">Cake surprise! 🎂</div>
-            </div>
-          </div>
-
-          <div class="gallery-item tall" data-src="assets/images/birthday.jpg" data-author="Sophia Chen" data-caption="High school squad reunion.">
-            <img src="assets/images/birthday.jpg" alt="Gallery Photo 4">
-            <div class="gallery-overlay-meta">
-              <div class="gallery-uploader">Sophia Chen</div>
-              <div class="gallery-caption">Squad reunion ✨</div>
-            </div>
-          </div>
-        </div>
+        <div class="gallery-grid" id="gallery-grid"></div>
       </div>
     </section>
 
@@ -486,148 +293,16 @@
         <div class="lightbox-details">
           <div>
             <div class="section-eyebrow" style="margin-bottom:0.5rem;">📸 Memory Zoom</div>
-            <h3 id="lightbox-author" style="font-size:1.4rem; margin-bottom:0.5rem;">Contributed by Emma</h3>
-            <p id="lightbox-caption" style="font-size:1rem; color:var(--color-ink-muted);">Memory description here.</p>
+            <h3 id="lightbox-author" style="font-size:1.4rem; margin-bottom:0.5rem;">Contributed Memory</h3>
+            <p id="lightbox-caption" style="font-size:1rem; color:var(--color-ink-muted);">Memory details</p>
           </div>
-          <div>
-            <button class="btn-add-memory" style="width:100%; justify-content:center;" id="lightbox-like-btn">❤️ Love This Memory</button>
+          <div style="display:flex; gap:0.5rem;">
+            <button class="wall-filter-btn" id="lightbox-prev-btn">← Prev</button>
+            <button class="wall-filter-btn" id="lightbox-next-btn">Next →</button>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- ==========================================================================
-         SECTION 6: CELEBRATION TIMELINE
-         ========================================================================== -->
-    <section class="timeline-section">
-      <div class="container">
-        <div class="section-eyebrow" style="display:table; margin-left:auto; margin-right:auto;">
-          🕒 Unfolding Journey
-        </div>
-        <h2 class="section-title">Celebration Timeline</h2>
-        <p class="section-desc">How the day unfolded step by step as love and wishes poured in.</p>
-
-        <div class="timeline-vertical-path">
-          <div class="timeline-event-card">
-            <span class="timeline-time-badge">9:00 AM</span>
-            <h4 class="timeline-event-title">Memory Page Created</h4>
-            <p class="timeline-event-desc">David & family created Sarah's 30th celebration link and sent out private invitations.</p>
-          </div>
-
-          <div class="timeline-event-card">
-            <span class="timeline-time-badge">10:15 AM</span>
-            <h4 class="timeline-event-title">First Wishes Received</h4>
-            <p class="timeline-event-desc">Emma and college friends added the first batch of polaroid memories and audio notes.</p>
-          </div>
-
-          <div class="timeline-event-card">
-            <span class="timeline-time-badge">1:00 PM</span>
-            <h4 class="timeline-event-title">Office Team Surprise Video</h4>
-            <p class="timeline-event-desc">Team Alpha uploaded the 5-minute video compilation recorded during Friday lunch.</p>
-          </div>
-
-          <div class="timeline-event-card">
-            <span class="timeline-time-badge">6:30 PM</span>
-            <h4 class="timeline-event-title">Golden Hour Garden Party Begins</h4>
-            <p class="timeline-event-desc">Guests arrived, scanned the table QR code, and live-uploaded cake cutting photos.</p>
-          </div>
-
-          <div class="timeline-event-card">
-            <span class="timeline-time-badge">11:00 PM</span>
-            <h4 class="timeline-event-title">Family Album Completed</h4>
-            <p class="timeline-event-desc">Relatives from 8 countries added 120+ photos, completing the 30th birthday scrapbook.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         SECTION 7: PEOPLE WHO MADE THIS SPECIAL (CONTRIBUTOR CLUSTERS)
-         ========================================================================== -->
-    <section class="people-section">
-      <div class="container">
-        <div class="section-eyebrow" style="display:table; margin-left:auto; margin-right:auto;">
-          👨‍👩‍👧‍👦 Relationship Circles
-        </div>
-        <h2 class="section-title">People Who Made This Special</h2>
-        <p class="section-desc">Every contribution represents a lifelong relationship.</p>
-
-        <div class="people-groups-grid">
-          <!-- Group 1: Family -->
-          <div class="people-group-card">
-            <div class="people-group-header">
-              <h4 class="people-group-title">🏡 Family</h4>
-              <span class="people-count-pill">24 Contributors</span>
-            </div>
-            <div class="contributor-avatar-cluster">
-              <div class="cluster-avatar-item" style="background-color:#E4603C;" data-name="David Vance (Father)">DV</div>
-              <div class="cluster-avatar-item" style="background-color:#EBC85A; color:#241621;" data-name="Mom">M</div>
-              <div class="cluster-avatar-item" style="background-color:#5C3A50;" data-name="Grandma Beatrice">GB</div>
-              <div class="cluster-avatar-item" style="background-color:#C94B29;" data-name="Marcus (Brother)">MV</div>
-              <div class="cluster-avatar-item" style="background-color:#3D2436;" data-name="Uncle Rob">UR</div>
-            </div>
-          </div>
-
-          <!-- Group 2: College Friends -->
-          <div class="people-group-card">
-            <div class="people-group-header">
-              <h4 class="people-group-title">🎓 College Friends</h4>
-              <span class="people-count-pill">68 Contributors</span>
-            </div>
-            <div class="contributor-avatar-cluster">
-              <div class="cluster-avatar-item" style="background-color:#5C3A50;" data-name="Sophia Chen">SC</div>
-              <div class="cluster-avatar-item" style="background-color:#E4603C;" data-name="Jason Lee">JL</div>
-              <div class="cluster-avatar-item" style="background-color:#EBC85A; color:#241621;" data-name="Chloe Vance">CV</div>
-              <div class="cluster-avatar-item" style="background-color:#C94B29;" data-name="Alex Rivera">AR</div>
-            </div>
-          </div>
-
-          <!-- Group 3: Colleagues -->
-          <div class="people-group-card">
-            <div class="people-group-header">
-              <h4 class="people-group-title">🏢 Colleagues & Team</h4>
-              <span class="people-count-pill">112 Contributors</span>
-            </div>
-            <div class="contributor-avatar-cluster">
-              <div class="cluster-avatar-item" style="background-color:#3D2436;" data-name="Team Alpha">TA</div>
-              <div class="cluster-avatar-item" style="background-color:#E4603C;" data-name="Julian (Design Lead)">JD</div>
-              <div class="cluster-avatar-item" style="background-color:#EBC85A; color:#241621;" data-name="Emma Watson">EW</div>
-              <div class="cluster-avatar-item" style="background-color:#5C3A50;" data-name="Kevin M.">KM</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         SECTION 8: MEMORY HIGHLIGHT STATS
-         ========================================================================== -->
-    <section class="stats-section">
-      <div class="container">
-        <div class="highlight-stats-grid">
-          <div class="stat-box-item">
-            <div class="stat-number">247</div>
-            <div class="stat-label">Contributors</div>
-          </div>
-          <div class="stat-box-item">
-            <div class="stat-number">8</div>
-            <div class="stat-label">Countries</div>
-          </div>
-          <div class="stat-box-item">
-            <div class="stat-number">812</div>
-            <div class="stat-label">Photos Saved</div>
-          </div>
-          <div class="stat-box-item">
-            <div class="stat-number">34</div>
-            <div class="stat-label">Videos Shared</div>
-          </div>
-          <div class="stat-box-item">
-            <div class="stat-number">126</div>
-            <div class="stat-label">Stories Written</div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- ==========================================================================
          SECTION 9: LEAVE YOUR MEMORY (PROMPT DRAWER)
@@ -667,7 +342,7 @@
       <div class="creation-modal-box">
         <button class="modal-close-icon" id="close-creation-modal">✕</button>
         <div class="section-eyebrow" style="margin-bottom:0.5rem;">✨ Create Keepsake</div>
-        <h3 style="font-size:1.5rem; margin-bottom:1.25rem;">Share a Memory for Sarah</h3>
+        <h3 style="font-size:1.5rem; margin-bottom:1.25rem;">Share a Memory</h3>
 
         <form id="creation-form">
           <div class="creation-form-group">
@@ -680,7 +355,7 @@
           </div>
 
           <div class="creation-form-group">
-            <label>Your Name</label>
+            <label>Your Name *</label>
             <input type="text" id="input-author" class="creation-input" placeholder="e.g. Maya Lin" required>
           </div>
 
@@ -695,55 +370,102 @@
           </div>
 
           <div class="creation-form-group">
-            <label>Your Memory or Message</label>
+            <label>Your Memory or Message *</label>
             <textarea id="input-message" class="creation-textarea" rows="4" placeholder="Write your heartfelt message here..." required></textarea>
           </div>
 
-          <button type="submit" class="btn-add-memory" style="width:100%; justify-content:center; padding:0.9rem; font-size:1.05rem;">
+          <!-- Photo Upload Input -->
+          <div class="creation-form-group" id="modal-photo-upload-group" style="display:none;">
+            <label>Attach Photo</label>
+            <input type="file" id="modal-photo-file" accept="image/*" class="creation-input">
+          </div>
+
+          <!-- Upload Progress Animation -->
+          <div id="upload-progress-bar-wrap" style="display:none; margin-bottom:1rem;">
+            <div style="font-size:0.85rem; font-weight:700; margin-bottom:0.3rem;">Uploading Memory...</div>
+            <div style="width:100%; height:6px; background:#EEE; border-radius:4px; overflow:hidden;">
+              <div id="upload-progress-fill" style="width:0%; height:100%; background:var(--color-terracotta); transition:width 0.3s linear;"></div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-add-memory" id="btn-submit-keepsake" style="width:100%; justify-content:center; padding:0.9rem; font-size:1.05rem;">
             ✨ Post Memory to Celebration Wall
           </button>
         </form>
       </div>
     </div>
 
-    <!-- ==========================================================================
-         SECTION 10: RELATED LIFE MOMENTS
-         ========================================================================== -->
-    <section class="life-moments-section">
-      <div class="container">
-        <div class="section-eyebrow" style="display:table; margin-left:auto; margin-right:auto;">
-          📖 Life Journey
-        </div>
-        <h2 class="section-title">Related Life Moments</h2>
-        <p class="section-desc">Life is a continuous collection of moments, not isolated events.</p>
+    <!-- SIMULATED AUTH MODAL -->
+    <div class="creation-modal-overlay" id="sim-auth-modal">
+      <div class="creation-modal-box" style="max-width:440px;">
+        <button class="modal-close-icon" id="close-auth-modal">✕</button>
+        <div class="section-eyebrow" style="margin-bottom:0.5rem;">🔐 Sign In Required</div>
+        <h3 style="font-size:1.4rem; margin-bottom:0.5rem;">Sign In to Contribute</h3>
+        <p style="font-size:0.9rem; color:var(--color-ink-muted); margin-bottom:1.25rem;">Enter your email to simulate instant magic link authentication.</p>
 
-        <div class="moments-cards-row">
-          <div class="moment-card">
-            <div class="moment-card-icon">🎓</div>
-            <h4 class="moment-card-title">Graduation 2018</h4>
-            <span class="moment-card-year">148 Memories Preserved</span>
+        <form id="sim-auth-form">
+          <div class="creation-form-group">
+            <label>Your Name *</label>
+            <input type="text" id="auth-input-name" class="creation-input" placeholder="e.g. Alex Rivera" required>
           </div>
-
-          <div class="moment-card">
-            <div class="moment-card-icon">💼</div>
-            <h4 class="moment-card-title">Promotion Party</h4>
-            <span class="moment-card-year">2022 • 86 Memories</span>
+          <div class="creation-form-group">
+            <label>Email Address *</label>
+            <input type="email" id="auth-input-email" class="creation-input" placeholder="e.g. alex@example.com" required>
           </div>
-
-          <div class="moment-card" style="border-color:var(--color-terracotta);">
-            <div class="moment-card-icon">🎂</div>
-            <h4 class="moment-card-title">30th Birthday (Active)</h4>
-            <span class="moment-card-year">2026 • 1,479 Keepsakes</span>
-          </div>
-
-          <div class="moment-card">
-            <div class="moment-card-icon">💍</div>
-            <h4 class="moment-card-title">Upcoming Wedding</h4>
-            <span class="moment-card-year">Planned 2027</span>
-          </div>
-        </div>
+          <button type="submit" class="btn-add-memory" style="width:100%; justify-content:center; padding:0.85rem;">
+            ⚡ Instant Magic Link Sign In
+          </button>
+        </form>
       </div>
-    </section>
+    </div>
+
+    <!-- HOST ADMIN CONTROL DRAWER MODAL -->
+    <div class="admin-drawer-overlay" id="admin-drawer-overlay">
+      <div class="admin-drawer-box">
+        <button class="modal-close-icon" id="close-admin-drawer">✕</button>
+        <div class="section-eyebrow" style="margin-bottom:0.5rem;">⚙️ Host Control Center</div>
+        <h3 style="font-size:1.5rem; margin-bottom:1.25rem;">Page Settings & Moderation</h3>
+
+        <!-- Settings Tabs -->
+        <div style="margin-bottom:1.5rem;">
+          <h4 style="font-family:var(--font-heading); font-size:1.1rem; margin-bottom:0.6rem;">Contribution Access Control</h4>
+          <div style="display:flex; flex-direction:column; gap:0.5rem;">
+            <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+              <input type="radio" name="drawer-privacy" value="open" id="drawer-privacy-open"> Public / Open (Anyone can post)
+            </label>
+            <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+              <input type="radio" name="drawer-privacy" value="guests" id="drawer-privacy-guests"> Guests Only (Guests with link)
+            </label>
+            <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+              <input type="radio" name="drawer-privacy" value="closed" id="drawer-privacy-closed"> Host Only / Closed
+            </label>
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.5rem;">
+          <label style="display:flex; align-items:center; justify-content:space-between; font-weight:700; font-size:0.95rem; cursor:pointer;">
+            <span>Auto-Approve Contributions</span>
+            <input type="checkbox" id="drawer-auto-approve" style="width:20px; height:20px; accent-color:var(--color-terracotta);">
+          </label>
+        </div>
+
+        <!-- Expiration Date Picker -->
+        <div class="creation-form-group">
+          <label>Page Expiry Datetime (Optional)</label>
+          <input type="datetime-local" id="drawer-expires-at" class="creation-input">
+        </div>
+
+        <!-- Pending Moderation Queue -->
+        <div style="margin-top:2rem;">
+          <h4 style="font-family:var(--font-heading); font-size:1.2rem; margin-bottom:0.8rem;">Pending Moderation Queue (<span id="pending-count-text">0</span>)</h4>
+          <div id="moderation-queue-container" style="display:flex; flex-direction:column; gap:0.8rem; max-height:280px; overflow-y:auto;"></div>
+        </div>
+
+        <button type="button" class="btn-add-memory" id="btn-save-drawer-settings" style="width:100%; justify-content:center; margin-top:1.5rem; padding:0.85rem;">
+          ✓ Save Host Settings
+        </button>
+      </div>
+    </div>
 
   </main>
 
@@ -759,8 +481,8 @@
         A digital celebration space crafted for birthdays, weddings, farewells, anniversaries, and life's moments.
       </p>
       <div style="display:flex; justify-content:center; gap:1.5rem; font-size:0.9rem; margin-bottom:1.5rem;">
-        <a href="index.html" style="color:var(--color-mustard); text-decoration:none;">← Back to Landing Page</a>
-        <a href="#preset-selector-group" style="color:rgba(251,246,236,0.8); text-decoration:none;">Switch Theme Preset</a>
+        <a href="creator.html" style="color:var(--color-mustard); text-decoration:none;">✨ Create New Memory Page</a>
+        <a href="index.html" style="color:rgba(251,246,236,0.8); text-decoration:none;">← Back to Landing Page</a>
       </div>
       <p style="font-size:0.8rem; color:rgba(251,246,236,0.5);">
         © 2026 SocioDex Inc. Preserving memories forever.
@@ -769,6 +491,7 @@
   </footer>
 
   <!-- Scripts -->
+  <script src="store.js"></script>
   <script src="memory.js"></script>
 </body>
 </html>

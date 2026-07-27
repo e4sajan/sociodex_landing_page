@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Memory & Invitation — SocioDex</title>
+  <meta name="description" content="Build interactive memory books and event invitations with custom themes, corporate branding, audio/video uploads, and QR codes.">
+  
+  <!-- Favicon & Stylesheets -->
+  <link rel="icon" type="image/png" href="assets/images/logo_transparent.png">
+  <link rel="stylesheet" href="creator.css">
+</head>
+<body>
+
+  <!-- Top Sticky Navigation -->
+  <nav class="creator-nav">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; width:100%;">
+      <a href="index.html" class="brand-link">
+        <img src="assets/images/logo_transparent.png" alt="SocioDex Logo">
+        <span style="font-family:var(--font-heading); font-size:1.35rem; font-weight:800; color:var(--color-ink);">SocioDex</span>
+      </a>
+      <span style="font-size:0.85rem; background-color:rgba(228,96,60,0.1); color:var(--color-terracotta); padding:0.3rem 0.8rem; border-radius:9999px; font-weight:700;">✨ Memory Maker</span>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Header Banner -->
+    <header class="creator-header">
+      <h1>Create a Living Memory Space</h1>
+      <p>Design a warm digital scrapbook or event invitation for someone special in less than 2 minutes.</p>
+    </header>
+
+    <!-- CREATOR FORM CONTAINER -->
+    <section class="creator-card" id="creator-form-card">
+      <form id="memory-creator-form">
+
+        <!-- 1. PAGE TYPE SELECTOR -->
+        <div class="form-section-title">
+          <span>📖</span> Choose Memory Format
+        </div>
+        <div class="type-selector-grid">
+          <div class="type-pill-btn active" data-type="wish">
+            <h3>💌 Wish & Memory Book</h3>
+            <p>Gather wishes, stories, photos, and voice notes for a milestone.</p>
+          </div>
+          <div class="type-pill-btn" data-type="invite">
+            <h3>🥂 Event Invitation Card</h3>
+            <p>Interactive event details, RSVPs, schedule timeline, and shared gallery.</p>
+          </div>
+        </div>
+
+        <!-- 2. OCCASION & COLOR THEME SELECTOR -->
+        <div class="form-section-title">
+          <span>🎨</span> Occasion & Color Palette
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="input-occasion">Occasion</label>
+            <select id="input-occasion" class="form-select" required>
+              <option value="Birthday">🎂 Birthday</option>
+              <option value="Wedding">💍 Wedding</option>
+              <option value="Farewell">👋 Farewell</option>
+              <option value="Anniversary">❤️ Anniversary</option>
+              <option value="Housewarming">🏡 Housewarming</option>
+              <option value="Thank You">🙏 Thank You</option>
+              <option value="Just Because">✨ Just Because</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="input-date">Date of Event / Milestone</label>
+            <input type="date" id="input-date" class="form-input" required>
+          </div>
+        </div>
+
+        <!-- Accent Theme Swatches -->
+        <label style="display:block; font-weight:700; font-size:0.9rem; margin-bottom:0.6rem;">Select Accent Theme</label>
+        <div class="theme-swatches-grid" id="theme-swatches-group">
+          <div class="theme-swatch-card active" data-theme="terracotta">
+            <div class="swatch-circle" style="background:linear-gradient(135deg, #F5E5DA 50%, #C17F5A 50%);"></div>
+            <div class="swatch-name">Terracotta</div>
+          </div>
+          <div class="theme-swatch-card" data-theme="sage">
+            <div class="swatch-circle" style="background:linear-gradient(135deg, #E9EFE2 50%, #2C5F2E 50%);"></div>
+            <div class="swatch-name">Sage</div>
+          </div>
+          <div class="theme-swatch-card" data-theme="indigo">
+            <div class="swatch-circle" style="background:linear-gradient(135deg, #E5E7F2 50%, #3E4A75 50%);"></div>
+            <div class="swatch-name">Indigo</div>
+          </div>
+          <div class="theme-swatch-card" data-theme="sunset">
+            <div class="swatch-circle" style="background:linear-gradient(135deg, #F8E6CB 50%, #D29A4D 50%);"></div>
+            <div class="swatch-name">Sunset</div>
+          </div>
+          <div class="theme-swatch-card" data-theme="rose">
+            <div class="swatch-circle" style="background:linear-gradient(135deg, #F4E1DD 50%, #B85D6E 50%);"></div>
+            <div class="swatch-name">Rose</div>
+          </div>
+        </div>
+
+        <!-- 3. PEOPLE & NAMES -->
+        <div class="form-section-title">
+          <span>👤</span> Celebrants & Hosts
+        </div>
+        <div class="form-row">
+          <!-- Shown for Wish pages -->
+          <div class="form-group" id="field-recipient-wrap">
+            <label for="input-recipient">Recipient Name *</label>
+            <input type="text" id="input-recipient" class="form-input" placeholder="e.g. Sarah Vance">
+          </div>
+          <!-- Shown for Invitation pages -->
+          <div class="form-group" id="field-couple-wrap" style="display:none;">
+            <label for="input-couple">Couple / Celebrants Name *</label>
+            <input type="text" id="input-couple" class="form-input" placeholder="e.g. Rahul & Priya">
+          </div>
+          <div class="form-group">
+            <label for="input-host">Organizer / Host Name *</label>
+            <input type="text" id="input-host" class="form-input" placeholder="e.g. David Vance & Friends" required>
+          </div>
+        </div>
+
+        <!-- First Host Wish (for Wish pages) -->
+        <div class="form-group" id="field-first-wish-wrap">
+          <label for="input-first-wish">First Host Message / Wish (Optional)</label>
+          <textarea id="input-first-wish" class="form-textarea" rows="3" placeholder="Write a warm opening message to introduce the celebration book..."></textarea>
+        </div>
+
+        <!-- 4. EVENT DETAILS (Shown for Invitation pages) -->
+        <div id="section-invite-details" style="display:none;">
+          <div class="form-section-title">
+            <span>📍</span> Event Details & Location
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="input-venue-name">Venue Name</label>
+              <input type="text" id="input-venue-name" class="form-input" placeholder="e.g. Grand Garden Estate">
+            </div>
+            <div class="form-group">
+              <label for="input-venue-addr">Venue Address</label>
+              <input type="text" id="input-venue-addr" class="form-input" placeholder="e.g. 742 Evergreen Terrace, Springfield">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="input-maps-url">Google Maps Link</label>
+              <input type="url" id="input-maps-url" class="form-input" placeholder="https://maps.google.com/...">
+            </div>
+            <div class="form-group">
+              <label for="input-dress-code">Dress Code</label>
+              <input type="text" id="input-dress-code" class="form-input" placeholder="e.g. Garden Cocktail / Formal">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="input-registry">Registry / Special Notes</label>
+            <textarea id="input-registry" class="form-textarea" rows="2" placeholder="e.g. Your presence is our gift! Gift registry available at..."></textarea>
+          </div>
+
+          <!-- Dynamic Timeline Schedule Editor -->
+          <label style="display:block; font-weight:700; font-size:0.9rem; margin-bottom:0.5rem;">Event Timeline Schedule</label>
+          <div id="timeline-editor-container">
+            <div class="timeline-row-item">
+              <input type="text" class="form-input timeline-time" placeholder="Time (e.g. 5:00 PM)" style="width:140px;">
+              <input type="text" class="form-input timeline-event" placeholder="Event (e.g. Welcome Drinks & Appetizers)">
+              <button type="button" class="btn-remove-row">✕</button>
+            </div>
+          </div>
+          <button type="button" class="btn-add-timeline" id="btn-add-timeline-row">+ Add Schedule Row</button>
+        </div>
+
+        <!-- 5. CORPORATE BRANDING MODE -->
+        <div class="form-section-title" style="margin-top:2rem;">
+          <span>🏢</span> Corporate Branding Mode
+        </div>
+        <div class="corporate-toggle-box">
+          <div class="toggle-switch-row">
+            <div>
+              <strong style="font-size:1rem; color:var(--color-ink);">Enable Corporate Branding</strong>
+              <p style="font-size:0.85rem; color:var(--color-ink-muted);">Display custom company logo on the public celebration page.</p>
+            </div>
+            <input type="checkbox" id="toggle-corporate" style="width:24px; height:24px; accent-color:var(--color-terracotta); cursor:pointer;">
+          </div>
+
+          <div id="corporate-logo-upload-wrap" style="display:none; margin-top:1rem;">
+            <label style="display:block; font-weight:700; font-size:0.85rem; margin-bottom:0.4rem;">Company Logo Upload (Required in Corporate Mode) *</label>
+            <input type="file" id="input-corporate-logo" accept="image/*" class="form-input">
+            <div class="logo-upload-preview" id="logo-preview-box" style="display:none;">
+              <img src="" id="logo-preview-img" class="logo-preview-img" alt="Logo Preview">
+              <button type="button" class="btn-remove-row" id="btn-remove-logo" style="width:auto; padding:0 0.8rem;">Remove Logo</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. MEDIA UPLOADS -->
+        <div class="form-section-title">
+          <span>📸</span> Media & Audio Keepsakes
+        </div>
+        <div class="form-row">
+          <!-- Photo Uploader -->
+          <div class="form-group">
+            <label>Upload Photos</label>
+            <div class="upload-dropzone" id="dropzone-photos">
+              <span style="font-size:1.8rem;">📷</span>
+              <p style="font-size:0.9rem; font-weight:600;">Click to select photos</p>
+              <input type="file" id="input-photos" accept="image/*" multiple style="display:none;">
+            </div>
+            <div class="media-previews-grid" id="photo-previews-grid"></div>
+          </div>
+
+          <!-- Video & Audio Uploader -->
+          <div class="form-group">
+            <label>Upload Videos (Max 3) & Audio</label>
+            <div style="display:flex; flex-direction:column; gap:0.6rem;">
+              <input type="file" id="input-video" accept="video/*" class="form-input">
+              <input type="file" id="input-audio" accept="audio/*" class="form-input">
+              
+              <!-- Voice Note Simulator Button -->
+              <button type="button" class="btn-add-timeline" id="btn-record-voicenote" style="justify-content:center; padding:0.75rem; background-color:rgba(228,96,60,0.1); color:var(--color-terracotta);">
+                🎙️ Simulate Voice Note Recording
+              </button>
+              <div id="voicenote-status-tag" style="display:none; font-size:0.8rem; font-weight:700; color:var(--color-terracotta); text-align:center;">
+                ✅ Simulated Voice Note Added (0:35)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUBMIT CREATE BUTTON -->
+        <button type="submit" class="btn-submit-create">
+          ✨ Generate Memory Page & Public Link
+        </button>
+
+      </form>
+    </section>
+
+    <!-- SUCCESS & CONTROL CENTER SCREEN -->
+    <section class="success-screen-wrapper" id="success-screen-card">
+      <div class="success-banner-box">
+        <span style="font-size:3rem; display:block; margin-bottom:0.5rem;">🎉</span>
+        <h2 style="font-family:var(--font-heading); font-size:2.2rem; margin-bottom:0.4rem;">Memory Created Successfully!</h2>
+        <p style="opacity:0.9; max-width:540px; margin:0 auto;">Your living celebration page is ready to share with friends, family, and guests.</p>
+      </div>
+
+      <div class="success-grid-layout">
+        <!-- Control Panel -->
+        <div>
+          <!-- Link & Actions -->
+          <div class="qr-card-box" style="text-align:left; margin-bottom:1.5rem;">
+            <label style="font-weight:700; font-size:0.9rem; display:block; margin-bottom:0.4rem;">Public Page URL</label>
+            <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+              <input type="text" id="success-public-url" class="form-input" readonly style="background-color:#FFF; font-weight:600;">
+              <button type="button" class="btn-add-timeline" id="btn-copy-url" style="background-color:var(--color-terracotta); color:white; padding:0 1.2rem;">Copy Link</button>
+            </div>
+            <a href="" id="btn-open-public-page" target="_blank" class="btn-submit-create" style="display:block; text-align:center; text-decoration:none; margin-top:0; font-size:1.05rem; padding:0.85rem;">
+              🚀 Open Public Memory Page
+            </a>
+          </div>
+
+          <!-- QR Code Display -->
+          <div class="qr-card-box" style="margin-bottom:1.5rem;">
+            <h4 style="font-family:var(--font-heading); font-size:1.2rem; margin-bottom:0.8rem;">Event QR Code</h4>
+            <canvas id="qr-code-canvas" style="margin:0 auto 1rem auto; display:block; border-radius:12px;"></canvas>
+            <button type="button" class="btn-add-timeline" id="btn-download-qr" style="width:100%; justify-content:center;">
+              📥 Download QR Code Image
+            </button>
+          </div>
+
+          <!-- Contribution Privacy Mode Modal -->
+          <div class="privacy-modal-card">
+            <h4 style="font-family:var(--font-heading); font-size:1.15rem; margin-bottom:0.4rem;">Contribution Access Control</h4>
+            <p style="font-size:0.85rem; color:var(--color-ink-muted); margin-bottom:1rem;">Choose who can add memories to this celebration page.</p>
+
+            <div class="privacy-option-item">
+              <input type="radio" name="privacy-mode" id="mode-open" value="open" checked>
+              <div>
+                <strong style="font-size:0.9rem; display:block;">Public / Open</strong>
+                <span style="font-size:0.775rem; color:var(--color-ink-muted);">Anyone with the link can contribute memories</span>
+              </div>
+            </div>
+
+            <div class="privacy-option-item">
+              <input type="radio" name="privacy-mode" id="mode-guests" value="guests">
+              <div>
+                <strong style="font-size:0.9rem; display:block;">Guests Only</strong>
+                <span style="font-size:0.775rem; color:var(--color-ink-muted);">Only invited guests with guest link can post</span>
+              </div>
+            </div>
+
+            <div class="privacy-option-item">
+              <input type="radio" name="privacy-mode" id="mode-closed" value="closed">
+              <div>
+                <strong style="font-size:0.9rem; display:block;">Host Only / Closed</strong>
+                <span style="font-size:0.775rem; color:var(--color-ink-muted);">Visitors can only view, contributions closed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone-style Live Preview -->
+        <div>
+          <h4 style="font-family:var(--font-heading); font-size:1.2rem; text-align:center; margin-bottom:0.8rem;">📱 Live Phone Preview</h4>
+          <div class="phone-mockup-frame">
+            <iframe id="phone-preview-iframe" src=""></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox Modal for Photo Upload Preview -->
+  <div id="creator-lightbox" style="position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:9999; display:none; align-items:center; justify-content:center;">
+    <img id="creator-lightbox-img" src="" style="max-width:90%; max-height:90%; object-fit:contain; border-radius:12px;">
+  </div>
+
+  <!-- Scripts -->
+  <script src="store.js"></script>
+  <script src="creator.js"></script>
+</body>
+</html>
